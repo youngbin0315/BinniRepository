@@ -19,7 +19,6 @@
 - [x] 포트 매핑 및 호스트-컨테이너 연결 확인
 - [x] Docker 볼륨 마운트 및 데이터 영속성 검증
 - [x] Git 사용자 설정 및 GitHub 리포지토리 연동 완료
-- [x] (보안) 마스킹 처리 완료 (토큰, 개인키, 이메일 등 민감정보 제거)
 
 ## 4. 검증 방법 요약표
 
@@ -38,4 +37,16 @@
 ### 5.1 Git 사용자 정보 설정
 ```bash
 $ git config --list
-[여기에 git config --list를 입력했을 때 나온 결과를 복사해서 붙여넣으세요. 이메일 등은 *** 로 가려주세요.]
+credential.helper=osxkeychain
+user.name=설영빈
+user.email=***ybseol315@gmail.com
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+core.ignorecase=true
+core.precomposeunicode=true
+remote.origin.url=https://github.com/youngbin0315/BinniRepository.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.main.remote=origin
+branch.main.merge=refs/heads/main
