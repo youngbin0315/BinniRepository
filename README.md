@@ -7,9 +7,9 @@
 
 ## 2. 실행 환경
 * **OS**: Mac (macOS)
-* **터미널**: [예: zsh]
-* **Docker 버전**: [여기에 `docker --version` 결과 기입, 예: Docker version 24.0.6]
-* **Git 버전**: [여기에 `git --version` 결과 기입, 예: git version 2.39.3]
+* **터미널**: zsh
+* **Docker 버전**: Docker version 28.5.2
+* **Git 버전**: git version 2.53.0
 
 ## 3. 수행 항목 체크리스트
 - [x] 터미널 기본 조작 및 파일/디렉토리 관리
