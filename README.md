@@ -265,6 +265,54 @@ exec: 컨테이너에 '보조 출입문'을 열고 들어가는 방식. 여기�
 # 작성한 Dockerfile 내용
 FROM nginx:lastest
 COPY index.html /usr/share/nginx/html/index.html
+```
+
+## 8.2 빌드 및 실행 로그
+```bash
+# 빌드 명령
+$ docker build -t my-custom-nginx .
+[+] Building 8.5s (7/7) FINISHED                                                                           docker:orbstack
+ => [internal] load build definition from Dockerfile                                                                  0.2s
+ => => transferring dockerfile: 103B                                                                                  0.0s
+ => [internal] load metadata for docker.io/library/nginx:latest                                                       2.8s
+ => [internal] load .dockerignore                                                                                     0.1s
+ => => transferring context: 2B                                                                                       0.0s
+ => [internal] load build context                                                                                     0.2s
+ => => transferring context: 68B                                                                                      0.0s
+ => [1/2] FROM docker.io/library/nginx:latest@sha256:7150b3a39203cb5bee612ff4a9d18774f8c7caf6399d6e8985e97e28eb751c1  4.4s
+ => => resolve docker.io/library/nginx:latest@sha256:7150b3a39203cb5bee612ff4a9d18774f8c7caf6399d6e8985e97e28eb751c1  0.2s
+ => => sha256:7150b3a39203cb5bee612ff4a9d18774f8c7caf6399d6e8985e97e28eb751c18 10.23kB / 10.23kB                      0.0s
+ => => sha256:c3fe1eeae810f4a585961f17339c93f0fb1c7c8d5c02c9181814f52bdd51961c 2.29kB / 2.29kB                        0.0s
+ => => sha256:ec781dee3f4719c2ca0dd9e73cb1d4ed834ed1a406495eb6e44b6dfaad5d1f8f 29.78MB / 29.78MB                      1.0s
+ => => sha256:0cf1d6af5ca72e2ca196afdbdbe26d96f141bd3dc14d70210707cf89032ea217 9.09kB / 9.09kB                        0.0s
+ => => sha256:bb3d0aa29654655a18d97605cd63947d39ca5166d44c3341acc1bbc8d14a7a36 33.16MB / 33.16MB                      1.5s
+ => => sha256:510ddf6557d618d548b6f7680a84dfa925fea17316d335264eb3f09284850cd8 626B / 626B                            1.0s
+ => => extracting sha256:ec781dee3f4719c2ca0dd9e73cb1d4ed834ed1a406495eb6e44b6dfaad5d1f8f                             1.1s
+ => => sha256:cde7a05ae42831ee510e8948b80b25c297a1080875a3479c55a65f1e620fdb73 955B / 955B                            1.6s
+ => => sha256:587e3d84dbb5b5fc406b2b292318c9a446e72c144ad849b5ef8755f5037e8704 402B / 402B                            1.6s
+ => => sha256:3189680c601f46244f1706d0d197ddb415d9bb754236c042acffc76eeda37d39 1.21kB / 1.21kB                        2.0s
+ => => sha256:5e815e07e5699b40479214a6a2a30d647495d99cd0f253ee82f528f4814469ef 1.40kB / 1.40kB                        2.1s
+ => => extracting sha256:bb3d0aa29654655a18d97605cd63947d39ca5166d44c3341acc1bbc8d14a7a36                             0.7s
+ => => extracting sha256:510ddf6557d618d548b6f7680a84dfa925fea17316d335264eb3f09284850cd8                             0.0s
+ => => extracting sha256:cde7a05ae42831ee510e8948b80b25c297a1080875a3479c55a65f1e620fdb73                             0.0s
+ => => extracting sha256:587e3d84dbb5b5fc406b2b292318c9a446e72c144ad849b5ef8755f5037e8704                             0.0s
+ => => extracting sha256:3189680c601f46244f1706d0d197ddb415d9bb754236c042acffc76eeda37d39                             0.0s
+ => => extracting sha256:5e815e07e5699b40479214a6a2a30d647495d99cd0f253ee82f528f4814469ef                             0.0s
+ => [2/2] COPY index.html /usr/share/nginx/html/index.html                                                            0.4s
+ => exporting to image                                                                                                0.2s
+ => => exporting layers                                                                                               0.1s
+ => => writing image sha256:70195e5bf5da7e1f527f99191b36211727806eaa835f34bbfce73b4303b88102                          0.0s
+ => => naming to docker.io/library/my-custom-nginx
+
+# 포트 매핑하여 실행
+$ docker run -d -p 8080:80 --name my_web my-custom-nginx
+b059b22c3efeb383b95cdf8616901391581e08a3cceb68242da25485bc4eca1a
+```
+
+## 8.3 포트 매핑 접속 증거
+
+![웹 서버 접속 스크린샷](web_capture.png)
+
 
 
 
