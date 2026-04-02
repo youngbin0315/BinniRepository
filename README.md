@@ -313,6 +313,7 @@ b059b22c3efeb383b95cdf8616901391581e08a3cceb68242da25485bc4eca1a
 
 ![웹 서버 접속 스크린샷](web_capture.png)
 
+![web_capture](https://github.com/user-attachments/assets/cdd3831b-4223-4c88-a9f9-02a8a95c7a73)
 
 
 
