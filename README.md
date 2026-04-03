@@ -53,7 +53,8 @@ branch.main.merge=refs/heads/main
 ```
 
 ### 5.2 GitHub 연동 증거
-![GitHub 연동 스크린샷](여기에 깃허브 리포지토리 화면을 캡처해서 드래그 앤 드롭 하세요)
+
+![capture_web](https://github.com/user-attachments/assets/08014026-5c36-4f70-a1c6-dd187982c61e)
 
 ---
 
@@ -310,8 +311,6 @@ b059b22c3efeb383b95cdf8616901391581e08a3cceb68242da25485bc4eca1a
 ```
 
 ## 8.3 포트 매핑 접속 증거
-
-![웹 서버 접속 스크린샷](web_capture.png)
 
 ![web_capture](https://github.com/user-attachments/assets/cdd3831b-4223-4c88-a9f9-02a8a95c7a73)
 
