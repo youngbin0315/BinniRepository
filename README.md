@@ -320,9 +320,33 @@ b059b22c3efeb383b95cdf8616901391581e08a3cceb68242da25485bc4eca1a
 ## Docker 볼륨 영속성 검증
 
 ### 9.1 볼륨 생성 및 확인
+```bash
+$ docker volume create my_data_volume
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     my_data_volume
+```
 
+### 9.2 컨테이너 연결 및 데이터 쓰기
+```bash
+$ docker run -d --name vol_test_container -v my_data_volume:/data nginx
+// 실행 결과가 길기 때문에 생략
+$ docker exec vol_test_container sh -c "echo 'Persistence Test Success' > /data/test.txt"
+$ docker exec vol_test_container cat /data/test.txt     // 여기서 'Persistence Test Success'를 출력함
+Persistence Test Success
+```
 
+### 9.3 컨테이너 삭제 후 데이터 유지 검증
+```bash
+$ docker stop vol_test_container
+$ docker rm vol_test_container        // 'vol_test_container'를 종료 및 삭제
 
+$ docker run -d --name vol_verify_container -v my_data_volume:/data nginx        // 'vol_verify_container'이라는 이름의 컨테이너로 이름을 바꾼 뒤 재 실행 준비
 
+$ docker exec vol_verify_container cat /data/test.txt
+Persistence Test Success     // 결과가 출력됨
+```
 
+### 검증 결과 요약
+vol_test_container를 완전히 삭제했음에도 불구하고, 동일한 볼륨(my_data_volume)을 마운트하여 실행한 vol_verify_container에서 이전에 생성한 test.txt 파일이 그대로 조회되는 것을 확인하였습니다.
 
