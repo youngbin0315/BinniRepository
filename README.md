@@ -288,9 +288,9 @@ exit
 선택한 베이스 이미지: nginx:lastest (웹 서버)
 커스텀 포인트 목적: NGINX의 기본 시작 페이지를 내가 만든 index.html 파일로 교체하여, 나만의 정적 웹 서버를 구동하기 위함.
 ```bash
-# 작성한 Dockerfile 내용
+# 작성한 my_web/Dockerfile 내용
 FROM nginx:lastest
-COPY index.html /usr/share/nginx/html/index.html
+COPY src/index.html /usr/share/nginx/html/index.html
 ```
 
 ※ 경로 선택 기준 및 환경 재현성
@@ -304,38 +304,21 @@ COPY index.html /usr/share/nginx/html/index.html
 ## 8.2 빌드 및 실행 로그
 ```bash
 # 빌드 명령
-$ docker build -t my-custom-nginx .
-[+] Building 8.5s (7/7) FINISHED                                                                           docker:orbstack
- => [internal] load build definition from Dockerfile                                                                  0.2s
- => => transferring dockerfile: 103B                                                                                  0.0s
- => [internal] load metadata for docker.io/library/nginx:latest                                                       2.8s
- => [internal] load .dockerignore                                                                                     0.1s
- => => transferring context: 2B                                                                                       0.0s
- => [internal] load build context                                                                                     0.2s
- => => transferring context: 68B                                                                                      0.0s
- => [1/2] FROM docker.io/library/nginx:latest@sha256:7150b3a39203cb5bee612ff4a9d18774f8c7caf6399d6e8985e97e28eb751c1  4.4s
- => => resolve docker.io/library/nginx:latest@sha256:7150b3a39203cb5bee612ff4a9d18774f8c7caf6399d6e8985e97e28eb751c1  0.2s
- => => sha256:7150b3a39203cb5bee612ff4a9d18774f8c7caf6399d6e8985e97e28eb751c18 10.23kB / 10.23kB                      0.0s
- => => sha256:c3fe1eeae810f4a585961f17339c93f0fb1c7c8d5c02c9181814f52bdd51961c 2.29kB / 2.29kB                        0.0s
- => => sha256:ec781dee3f4719c2ca0dd9e73cb1d4ed834ed1a406495eb6e44b6dfaad5d1f8f 29.78MB / 29.78MB                      1.0s
- => => sha256:0cf1d6af5ca72e2ca196afdbdbe26d96f141bd3dc14d70210707cf89032ea217 9.09kB / 9.09kB                        0.0s
- => => sha256:bb3d0aa29654655a18d97605cd63947d39ca5166d44c3341acc1bbc8d14a7a36 33.16MB / 33.16MB                      1.5s
- => => sha256:510ddf6557d618d548b6f7680a84dfa925fea17316d335264eb3f09284850cd8 626B / 626B                            1.0s
- => => extracting sha256:ec781dee3f4719c2ca0dd9e73cb1d4ed834ed1a406495eb6e44b6dfaad5d1f8f                             1.1s
- => => sha256:cde7a05ae42831ee510e8948b80b25c297a1080875a3479c55a65f1e620fdb73 955B / 955B                            1.6s
- => => sha256:587e3d84dbb5b5fc406b2b292318c9a446e72c144ad849b5ef8755f5037e8704 402B / 402B                            1.6s
- => => sha256:3189680c601f46244f1706d0d197ddb415d9bb754236c042acffc76eeda37d39 1.21kB / 1.21kB                        2.0s
- => => sha256:5e815e07e5699b40479214a6a2a30d647495d99cd0f253ee82f528f4814469ef 1.40kB / 1.40kB                        2.1s
- => => extracting sha256:bb3d0aa29654655a18d97605cd63947d39ca5166d44c3341acc1bbc8d14a7a36                             0.7s
- => => extracting sha256:510ddf6557d618d548b6f7680a84dfa925fea17316d335264eb3f09284850cd8                             0.0s
- => => extracting sha256:cde7a05ae42831ee510e8948b80b25c297a1080875a3479c55a65f1e620fdb73                             0.0s
- => => extracting sha256:587e3d84dbb5b5fc406b2b292318c9a446e72c144ad849b5ef8755f5037e8704                             0.0s
- => => extracting sha256:3189680c601f46244f1706d0d197ddb415d9bb754236c042acffc76eeda37d39                             0.0s
- => => extracting sha256:5e815e07e5699b40479214a6a2a30d647495d99cd0f253ee82f528f4814469ef                             0.0s
- => [2/2] COPY index.html /usr/share/nginx/html/index.html                                                            0.4s
- => exporting to image                                                                                                0.2s
- => => exporting layers                                                                                               0.1s
- => => writing image sha256:70195e5bf5da7e1f527f99191b36211727806eaa835f34bbfce73b4303b88102                          0.0s
+# my_web 폴더를 대상으로 빌드 명령 실행
+$ docker build -t my-custom-nginx ./my_web
+[+] Building 8.5s (7/7) FINISHED                                                                 docker:orbstack
+ => [internal] load build definition from Dockerfile                                                        0.2s
+ => => transferring dockerfile: 103B                                                                        0.0s
+ => [internal] load metadata for docker.io/library/nginx:latest                                             2.8s
+ => [internal] load .dockerignore                                                                           0.1s
+ => => transferring context: 2B                                                                             0.0s
+ => [internal] load build context                                                                           0.2s
+ => => transferring context: 68B                                                                            0.0s
+ => [1/2] FROM docker.io/library/nginx:latest@sha256:7150b3a39203cb5bee612ff4a9d18774f8c7caf6399d6e8985e9...
+ => [2/2] COPY src/index.html /usr/share/nginx/html/index.html                                              0.4s
+ => exporting to image                                                                                      0.2s
+ => => exporting layers                                                                                     0.1s
+ => => writing image sha256:70195e5bf5da7e1f527f99191b36211727806eaa835f34bbfce73b4303b88102                0.0s
  => => naming to docker.io/library/my-custom-nginx
 
 # 포트 매핑하여 실행
@@ -343,13 +326,28 @@ $ docker run -d -p 8080:80 --name my_web my-custom-nginx
 b059b22c3efeb383b95cdf8616901391581e08a3cceb68242da25485bc4eca1a
 ```
 
-## 8.3 포트 매핑 접속 증거
+## 8.3 포트 매핑의 필요성 및 트러블 슈팅
+
+ - 접속 불가 이유 및 매핑의 필요성: 도커 컨테이너는 호스트 컴퓨터(내 PC)와 완전히 분리된 가상의 독립적인 네트워크를 사용하므로, 외부 브라우저에서 컨테이너 내부 포트(80)로 직접 접근할 수 없습니다. 따라서 외부 요청을 컨테이너 내부로 전달해주기 위해 호스트 포트(8080)와 컨테이너 포트(80)를 연결하는 포트 매핑(-p 8080:80)이 반드시 필요합니다.
+
+ - 포트 충돌 진단 순서: 만약 호스트 포트가 이미 사용 중이라는 오류가 발생하면 다음 순서로 대처합니다.
+
+    1. docker ps로 8080 포트를 점유 중인 다른 컨테이너가 있는지 확인하고, 있다면 docker stop [컨테이너명]으로 중지합니다.
+
+    2. 로컬의 다른 프로세스가 점유 중이라면 lsof -i :8080 명령어로 원인을 파악하거나, run 실행 시 매핑 포트를 변경(-p 8081:80)하여 실행합니다.
+
+## 8.4 포트 매핑 접속 증거
 
 ![web_capture](https://github.com/user-attachments/assets/cdd3831b-4223-4c88-a9f9-02a8a95c7a73)
 
 ---
 
-## Docker 볼륨 영속성 검증
+## 9. Docker 볼륨 영속성 검증
+
+※ 데이터 증발 경험 및 볼륨 설정의 목적
+실습 중 docker rm으로 컨테이너를 완전히 삭제하면, 컨테이너 내부에 임시로 만들어뒀던 파일이나 데이터가 모두 초기화(증발)되는 것을 확인했습니다. 이를 방지하기 위해 컨테이너의 특정 경로를 호스트의 공간과 연결하는 **도커 볼륨(Volume)**을 생성했습니다.
+
+아래의 docker run -v my_data_volume:/data 명령어 설정을 통해, 컨테이너가 삭제되더라도 데이터는 호스트에 안전하게 남아 언제든 다시 연결할 수 있는 재현 가능한 영속성 환경을 구성했습니다.
 
 ### 9.1 볼륨 생성 및 확인
 ```bash
@@ -379,6 +377,9 @@ $ docker exec vol_verify_container cat /data/test.txt
 Persistence Test Success     // 결과가 출력됨
 ```
 
-### 검증 결과 요약
-vol_test_container를 완전히 삭제했음에도 불구하고, 동일한 볼륨(my_data_volume)을 마운트하여 실행한 vol_verify_container에서 이전에 생성한 test.txt 파일이 그대로 조회되는 것을 확인하였습니다.
+### 9.4 검증 결과 요약 및 재현성
 
+vol_test_container를 완전히 삭제했음에도 불구하고, 동일한 볼륨(my_data_volume)을 마운트하여 실행한 새로운 vol_verify_container에서 이전에 생성한 test.txt 파일이 그대로 조회되는 것을 확인하였습니다.
+이를 통해 컨테이너가 삭제되더라도 데이터는 호스트에 안전하게 남아 언제든 다시 연결할 수 있는 재현 가능한 영속성 환경이 성공적으로 구성되었음을 검증했습니다.
+
+---
